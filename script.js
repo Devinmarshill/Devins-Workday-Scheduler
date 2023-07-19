@@ -2,6 +2,7 @@ $(function () {
 // the following function is creating variables for the IDs found in the HTML and are going to format the date of the calendar to show today's date in a Day, Month and Date format.
 var currentDayEl=$("#currentDay")
 var currentDayTime=dayjs().format("dddd MMMM, DD")
+var saveBtn=$(".saveBtn")
 // console.log(currentDayTime)
 currentDayEl.text(currentDayTime)
 var currentHour= dayjs().hour()
@@ -15,8 +16,20 @@ var currentHour= dayjs().hour()
     else if(currentHour>i){
       timeBlock.addClass("past")
     }
+    else {
+      timeBlock.addClass("future")
+    }
   }
-  // the for loop above searchs to see if the current hour is equal to the present time, ir will add a "present" class otherwise it will add a class of "past"
+  // the for loop above searchs to see if the current hour is equal to the present time, it will add a "present" class if the current hour is greater than "i" it will add a class of "past"
+
+  function saveEvent(event){
+    var currentButton=$(event.target)
+    var textArea= currentButton.siblings("textarea")
+
+    alert(textArea.val())
+  }
+
+  saveBtn.on("click", saveEvent)
 
 
 
@@ -27,25 +40,11 @@ var currentHour= dayjs().hour()
   // useful when saving the description in local storage?
   //
 
-
-
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-
-
-
-
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
 
-
-
-  
+ 
   // TODO: Add code to display the current date in the header of the page.
 });
