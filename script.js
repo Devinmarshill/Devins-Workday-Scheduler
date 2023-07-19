@@ -1,19 +1,25 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(function () {
-
+// the following function is creating variables for the IDs found in the HTML and are going to format the date of the calendar to show today's date in a Day, Month and Date format.
 var currentDayEl=$("#currentDay")
 var currentDayTime=dayjs().format("dddd MMMM, DD")
-console.log(currentDayTime)
-currentDayEl.text('')
+// console.log(currentDayTime)
+currentDayEl.text(currentDayTime)
 var currentHour= dayjs().hour()
-console.log(currentHour)
+// console.log(currentHour)
 
   for (let i = 9; i < 18; i++) {
-    
-    
+    var timeBlock=$("#hour-"+i)
+    if(i===currentHour){
+      timeBlock.addClass("present")
+    }
+    else if(currentHour>i){
+      timeBlock.addClass("past")
+    }
   }
+  // the for loop above searchs to see if the current hour is equal to the present time, ir will add a "present" class otherwise it will add a class of "past"
+
+
+
 // TODO: Add a listener for click events on the save button. This code shoudata/ use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
